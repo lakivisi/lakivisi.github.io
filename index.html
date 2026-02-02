@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -16,133 +16,540 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: #1f2937;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            line-height: 1.6;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .container {
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
+        body {
+            font-family: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0a192f;
+            color: #8892b0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background-color: #233554;
+            color: #64ffda;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 50px;
+            height: 100px;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            height: 70px;
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
         }
 
         .logo {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .heading {
             font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .titles {
-            font-size: 0.95rem;
-            color: #4f46e5;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .values {
-            font-size: 0.9rem;
-            color: #6b7280;
-            font-style: italic;
-            margin-bottom: 3rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            padding: 0.875rem 1.5rem;
-            font-size: 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background-color: #4f46e5;
-            color: white;
-            font-weight: 500;
-        }
-
-        .btn-primary:hover {
-            background-color: #4338ca;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #4f46e5;
-            border: 2px solid #4f46e5;
-            font-weight: 500;
-        }
-
-        .btn-secondary:hover {
-            background-color: #4f46e5;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .coffee-link {
-            color: #4f46e5;
-            text-decoration: none;
-            font-size: 0.95rem;
+            font-weight: 700;
+            color: #64ffda;
             transition: color 0.3s ease;
         }
 
-        .coffee-link:hover {
-            color: #6366f1;
+
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
         }
 
+        .nav-links a {
+            color: #ccd6f6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #64ffda;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #64ffda;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-number {
+            color: #64ffda;
+            font-family: 'Courier New', monospace;
+            margin-right: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ccd6f6;
+        }
+
+        .section-title::before {
+            content: '0' counter(section) '.';
+            counter-increment: section;
+            font-family: 'Courier New', monospace;
+            color: #64ffda;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #233554;
+            margin-left: 20px;
+        }
+
+        /* Hero Section */
+        #hero {
+            counter-reset: section;
+        }
+
+        .hero-intro {
+            font-family: 'Courier New', monospace;
+            color: #64ffda;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            font-weight: 700;
+            color: #ccd6f6;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .hero-tagline {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #8892b0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            max-width: 540px;
+            font-size: 1.1rem;
+            color: #8892b0;
+            margin-bottom: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.25rem 1.75rem;
+            border: 1px solid #64ffda;
+            border-radius: 4px;
+            color: #64ffda;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translate(-5px, -5px);
+            box-shadow: 5px 5px 0 0 #64ffda;
+        }
+
+        /* About Section */
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        .skills-list li {
+            position: relative;
+            padding-left: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .skills-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #64ffda;
+            border-radius: 4px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image:hover::before {
+            transform: translate(-10px, -10px);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(100%) contrast(1);
+            mix-blend-mode: multiply;
+            transition: all 0.3s ease;
+        }
+
+        .about-image:hover img {
+            filter: none;
+            mix-blend-mode: normal;
+        }
+
+        /* Experience Section */
+        .experience-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .job-tabs {
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid #233554;
+            min-width: 200px;
+        }
+
+        .job-tab {
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: #8892b0;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job-tab:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+        }
+
+        .job-tab.active {
+            color: #64ffda;
+        }
+
+        .job-tab.active::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #64ffda;
+        }
+
+        .job-content {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .job-panel {
+            display: none;
+        }
+
+        .job-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            color: #ccd6f6;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            color: #64ffda;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .job-date {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #8892b0;
+            margin-bottom: 20px;
+        }
+
+        .job-description {
+            list-style: none;
+        }
+
+        .job-description li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .job-description li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+            font-size: 1.2rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background-color: #112240;
+            padding: 2rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(2, 12, 27, 0.7);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-icon {
+            font-size: 2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: #ccd6f6;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .project-links a:hover {
+            color: #64ffda;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: #ccd6f6;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #8892b0;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #8892b0;
+        }
+
+        /* Contact Section */
+        #contact {
+            align-items: center;
+            text-align: center;
+        }
+
+        #contact .section-title {
+            justify-content: center;
+        }
+
+        #contact .section-title::after {
+            display: none;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            color: #ccd6f6;
+            margin-bottom: 20px;
+        }
+
+        .contact-description {
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            color: #8892b0;
+        }
+
+        /* Social Links Sidebar */
+        .social-sidebar {
+            position: fixed;
+            bottom: 0;
+            left: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .social-sidebar::after {
+            content: '';
+            width: 1px;
+            height: 90px;
+            background-color: #8892b0;
+        }
+
+        .social-sidebar a {
+            color: #8892b0;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-sidebar a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+
+        /* Email Sidebar */
+        .email-sidebar {
+            position: fixed;
+            bottom: 0;
+            right: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .email-sidebar::after {
+            content: '';
+            width: 1px;
+            height: 90px;
+            background-color: #8892b0;
+            margin-top: 20px;
+        }
+
+        .email-sidebar a {
+            writing-mode: vertical-rl;
+            color: #8892b0;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .email-sidebar a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
         .footer {
-            font-size: 0.875rem;
-            color: #9ca3af;
-            margin-top: 2rem;
+            text-align: center;
+            padding: 20px;
+            color: #8892b0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
         }
 
         /* Modal Styles */
@@ -288,50 +695,412 @@
             overflow: hidden;
         }
 
-        @media (min-width: 768px) {
-            .buttons-container {
-                flex-direction: row;
-                justify-content: center;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #112240;
+            border-radius: 4px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(2, 12, 27, 0.7);
+            animation: modalSlideIn 0.3s ease;
+            border: 1px solid #233554;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8892b0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #64ffda;
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #ccd6f6;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ccd6f6;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #233554;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            font-family: inherit;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #64ffda;
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h3 {
+            color: #64ffda;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: #8892b0;
+            font-size: 1rem;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 25px;
             }
 
-            .social-links {
-                flex-direction: row;
-                justify-content: center;
+            .main-content {
+                padding: 0 25px;
             }
 
-            .logo {
-                font-size: 4.5rem;
+            .hero-name {
+                font-size: 3rem;
+            }
+
+            .hero-tagline {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            #about .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-container {
+                flex-direction: column;
+            }
+
+            .job-tabs {
+                flex-direction: row;
+                border-left: none;
+                border-bottom: 2px solid #233554;
+                overflow-x: auto;
+            }
+
+            .job-tab.active::before {
+                left: 0;
+                right: 0;
+                top: auto;
+                bottom: -2px;
+                width: auto;
+                height: 2px;
+            }
+
+            .social-sidebar,
+            .email-sidebar {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="logo">Loice Andia</h1>
-        <p class="tagline">Engineering Leader | Managing Director | Technical Writer</p>
-        <div class="titles">
-            Cofounder & Managing Director at Acoruss<br>
-            Head of Engineering at Gapstack.com
-        </div>
-        <p class="values">Team first, learning second, then delivery</p>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">Loice Andia</div>
+        <ul class="nav-links">
+            <li><a href="#about"><span class="nav-number">01.</span>About</a></li>
+            <li><a href="#experience"><span class="nav-number">02.</span>Experience</a></li>
+            <li><a href="#projects"><span class="nav-number">03.</span>Projects</a></li>
+            <li><a href="#contact"><span class="nav-number">04.</span>Contact</a></li>
+        </ul>
+    </nav>
 
-        <div class="buttons-container">
-            <button id="consultancyBtn" class="btn btn-primary">📧 Get in Touch for Consultancy</button>
-        </div>
-
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/loice-andia/" class="btn btn-secondary">💼 LinkedIn</a>
-            <a href="https://github.com/lakivisi" class="btn btn-secondary">🔗 GitHub</a>
-            <a href="https://lakivisi.substack.com/" class="btn btn-secondary">📝 Substack</a>
-        </div>
-
-        <a href="https://buymeacoffee.com/loiceandia" class="coffee-link">☕ buy me a coffee</a>
-
-        <footer class="footer">
-            Copyright &copy; <script type="text/JavaScript">document.write(new Date().getFullYear());</script>
-        </footer>
+    <!-- Social Sidebar -->
+    <div class="social-sidebar">
+        <a href="https://github.com/lakivisi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">🔗</a>
+        <a href="https://www.linkedin.com/in/loice-andia/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">💼</a>
+        <a href="https://lakivisi.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">📝</a>
+        <a href="https://buymeacoffee.com/loiceandia" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee">☕</a>
     </div>
+
+    <!-- Email Sidebar -->
+    <div class="email-sidebar">
+        <a href="#contact">Get in Touch</a>
+    </div>
+
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section id="hero">
+            <p class="hero-intro">Hi, my name is</p>
+            <h1 class="hero-name">Loice Andia</h1>
+            <h2 class="hero-tagline">I build and lead engineering teams.</h2>
+            <p class="hero-description">
+                I'm an Engineering Leader and Managing Director specializing in building scalable systems 
+                and empowering high-performing teams. Currently, I'm focused on delivering exceptional 
+                technical solutions at <a href="#" style="color: #64ffda;">Acoruss</a> and 
+                <a href="#" style="color: #64ffda;">Gapstack</a>.
+            </p>
+            <button id="consultancyBtn" class="cta-button">Get in Touch for Consultancy</button>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hello! I'm Loice, an engineering leader passionate about building technology that makes a difference. 
+                        My journey in tech began with a curiosity for how things work, which has evolved into a career 
+                        focused on creating impactful solutions and mentoring teams.
+                    </p>
+                    <p>
+                        As the Cofounder & Managing Director at Acoruss and Head of Engineering at Gapstack.com, 
+                        I combine technical expertise with leadership to drive innovation and deliver results.
+                    </p>
+                    <p>
+                        My philosophy is simple: <strong style="color: #64ffda;">Team first, learning second, then delivery.</strong> 
+                        This approach has helped me build cohesive, high-performing teams that consistently exceed expectations.
+                    </p>
+                    <p>Here are some technologies I've been working with:</p>
+                    <ul class="skills-list">
+                        <li>JavaScript (ES6+)</li>
+                        <li>React & Node.js</li>
+                        <li>Python</li>
+                        <li>Cloud Architecture</li>
+                        <li>Team Leadership</li>
+                        <li>Agile & DevOps</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #64ffda 0%, #0a192f 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 3rem;">👩‍💻</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2 class="section-title">Where I've Worked</h2>
+            <div class="experience-container">
+                <div class="job-tabs">
+                    <button class="job-tab active" data-job="acoruss">Acoruss</button>
+                    <button class="job-tab" data-job="gapstack">Gapstack</button>
+                    <button class="job-tab" data-job="microsoft">Microsoft</button>
+                </div>
+                <div class="job-content">
+                    <div class="job-panel active" id="acoruss">
+                        <h3 class="job-title">Cofounder & Managing Director</h3>
+                        <p class="job-company">@ Acoruss</p>
+                        <p class="job-date">2020 - Present</p>
+                        <ul class="job-description">
+                            <li>Lead strategic direction and overall operations of the company</li>
+                            <li>Build and manage cross-functional teams to deliver innovative solutions</li>
+                            <li>Establish engineering best practices and technical standards</li>
+                            <li>Drive business growth through technical leadership and strategic partnerships</li>
+                        </ul>
+                    </div>
+                    <div class="job-panel" id="gapstack">
+                        <h3 class="job-title">Head of Engineering</h3>
+                        <p class="job-company">@ Gapstack.com</p>
+                        <p class="job-date">2019 - Present</p>
+                        <ul class="job-description">
+                            <li>Lead engineering team in developing scalable web applications</li>
+                            <li>Architect and implement cloud-based solutions</li>
+                            <li>Mentor junior developers and conduct technical interviews</li>
+                            <li>Collaborate with product team to define technical roadmap</li>
+                        </ul>
+                    </div>
+                    <div class="job-panel" id="microsoft">
+                        <h3 class="job-title">Software Engineer</h3>
+                        <p class="job-company">@ Microsoft</p>
+                        <p class="job-date">2017 - 2019</p>
+                        <ul class="job-description">
+                            <li>Developed and maintained large-scale enterprise applications</li>
+                            <li>Collaborated with international teams on critical projects</li>
+                            <li>Implemented robust testing frameworks and CI/CD pipelines</li>
+                            <li>Participated in code reviews and architecture discussions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Some Things I've Built</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">📁</span>
+                        <div class="project-links">
+                            <a href="https://github.com/lakivisi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">🔗</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Enterprise Solutions Platform</h3>
+                    <p class="project-description">
+                        A comprehensive platform for managing enterprise workflows, featuring real-time collaboration, 
+                        advanced analytics, and seamless integrations with popular business tools.
+                    </p>
+                    <ul class="project-tech">
+                        <li>React</li>
+                        <li>Node.js</li>
+                        <li>PostgreSQL</li>
+                        <li>AWS</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">📁</span>
+                        <div class="project-links">
+                            <a href="https://github.com/lakivisi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">🔗</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Team Collaboration Tool</h3>
+                    <p class="project-description">
+                        An innovative tool designed to enhance team collaboration with features like task management, 
+                        video conferencing, and project tracking.
+                    </p>
+                    <ul class="project-tech">
+                        <li>Vue.js</li>
+                        <li>Python</li>
+                        <li>MongoDB</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">📁</span>
+                        <div class="project-links">
+                            <a href="https://lakivisi.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="External">📝</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Technical Writing & Insights</h3>
+                    <p class="project-description">
+                        Regular articles and insights on engineering leadership, software development best practices, 
+                        and emerging technologies in the tech industry.
+                    </p>
+                    <ul class="project-tech">
+                        <li>Leadership</li>
+                        <li>Architecture</li>
+                        <li>Best Practices</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">What's Next?</h2>
+            <div class="contact-content">
+                <h2 class="contact-title">Get In Touch</h2>
+                <p class="contact-description">
+                    I'm currently available for consultancy work and always interested in hearing about new opportunities. 
+                    Whether you have a question or just want to say hi, feel free to reach out!
+                </p>
+                <button id="consultancyBtn2" class="cta-button">Say Hello</button>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        Copyright &copy; <script type="text/JavaScript">document.write(new Date().getFullYear());</script> Loice Andia
+    </footer>
 
     <!-- Modal -->
     <div id="consultancyModal" class="modal">
@@ -380,10 +1149,10 @@
                                   maxlength="6000" 
                                   required></textarea>
                         <span class="error-message" id="messageError">Please enter your message (max 1000 words)</span>
-                        <span style="font-size: 0.875rem; color: #6b7280; display: block; margin-top: 0.25rem;" id="wordCount">0 / 1000 words</span>
+                        <span style="font-size: 0.875rem; color: #8892b0; display: block; margin-top: 0.25rem;" id="wordCount">0 / 1000 words</span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Inquiry</button>
+                    <button type="submit" class="cta-button" style="width: 100%;">Send Inquiry</button>
                 </form>
             </div>
 
@@ -395,9 +1164,36 @@
     </div>
 
     <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Experience tabs
+        const jobTabs = document.querySelectorAll('.job-tab');
+        const jobPanels = document.querySelectorAll('.job-panel');
+
+        jobTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const jobId = tab.getAttribute('data-job');
+                
+                jobTabs.forEach(t => t.classList.remove('active'));
+                jobPanels.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(jobId).classList.add('active');
+            });
+        });
+
         // Modal Elements
         const modal = document.getElementById('consultancyModal');
         const consultancyBtn = document.getElementById('consultancyBtn');
+        const consultancyBtn2 = document.getElementById('consultancyBtn2');
         const modalClose = document.getElementById('modalClose');
         const form = document.getElementById('consultancyForm');
         const formContainer = document.getElementById('formContainer');
@@ -419,11 +1215,14 @@
         const wordCountDisplay = document.getElementById('wordCount');
 
         // Open Modal
-        consultancyBtn.addEventListener('click', () => {
+        function openModal() {
             modal.classList.add('active');
             document.body.classList.add('modal-open');
             nameInput.focus();
-        });
+        }
+
+        consultancyBtn.addEventListener('click', openModal);
+        consultancyBtn2.addEventListener('click', openModal);
 
         // Close Modal Function
         function closeModal() {
@@ -531,7 +1330,7 @@
             if (wordCount > 1000) {
                 wordCountDisplay.style.color = '#ef4444';
             } else {
-                wordCountDisplay.style.color = '#6b7280';
+                wordCountDisplay.style.color = '#8892b0';
             }
         }
 
