@@ -214,7 +214,7 @@
         }
 
         .cta-button {
-            display: inline-block;
+            display: block;
             padding: 1.25rem 1.75rem;
             border: 1px solid #64ffda;
             border-radius: 4px;
@@ -225,6 +225,7 @@
             background-color: transparent;
             cursor: pointer;
             font-family: inherit;
+            text-align: center;
         }
 
         .cta-button:hover {
@@ -535,6 +536,14 @@
         .contact-social-links a:hover {
             color: #64ffda;
             transform: translateY(-3px);
+        }
+
+        .contact-cta-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         /* Social Links Sidebar */
@@ -1081,7 +1090,7 @@
                 technical solutions at <a href="#" style="color: #64ffda;">Acoruss</a> and 
                 <a href="#" style="color: #64ffda;">Gapstack</a>.
             </p>
-            <button id="consultancyBtn" class="cta-button">Let's Work Together</button>
+            <a href="#contact" class="cta-button">Let's Work Together</a>
         </section>
 
         <!-- About Section -->
@@ -1221,6 +1230,25 @@
                         <li>LLMs</li>
                     </ul>
                 </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-icon">💰</span>
+                        <div class="project-links">
+                            <a href="https://alphababes.loiceandia.com/" target="_blank" rel="noopener noreferrer" aria-label="Live Site">🔗</a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Alpha Babes</h3>
+                    <p class="project-description">
+                        A portfolio platform showcasing my chama group's contributions, investments, and financial insights. 
+                        Visualises collective investment data and tracks the group's growth over time.
+                    </p>
+                    <ul class="project-tech">
+                        <li>Finance</li>
+                        <li>Data Viz</li>
+                        <li>Portfolio</li>
+                        <li>Investments</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -1259,7 +1287,10 @@
                         </svg>
                     </a>
                 </div>
-                <button id="consultancyBtn2" class="cta-button">Say Hello</button>
+                <div class="contact-cta-buttons">
+                    <button id="consultancyBtn2" class="cta-button">Say Hello</button>
+                    <a href="https://calendar.app.google/1yGmdUdcscUmoD416" target="_blank" rel="noopener noreferrer" class="cta-button">Schedule a Call</a>
+                </div>
             </div>
         </section>
     </div>
@@ -1358,7 +1389,6 @@
 
         // Modal Elements
         const modal = document.getElementById('consultancyModal');
-        const consultancyBtn = document.getElementById('consultancyBtn');
         const consultancyBtn2 = document.getElementById('consultancyBtn2');
         const modalClose = document.getElementById('modalClose');
         const form = document.getElementById('consultancyForm');
@@ -1387,7 +1417,7 @@
             nameInput.focus();
         }
 
-        consultancyBtn.addEventListener('click', openModal);
+        // consultancyBtn now links directly to #contact
         consultancyBtn2.addEventListener('click', openModal);
 
         // Close Modal Function
